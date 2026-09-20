@@ -1,0 +1,32 @@
+name: StableTune CI
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  test:
+    runs-on: windows-latest
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v5
+
+      - name: Show PowerShell version
+        shell: pwsh
+        run: $PSVersionTable.PSVersion.ToString()
+
+      - name: Verify repository index
+        shell: pwsh
+        run: ./tools/Verify-Repository.ps1
+
+      - name: Run deterministic smoke tests
+        shell: pwsh
+        run: ./tests/Test-Smoke.ps1

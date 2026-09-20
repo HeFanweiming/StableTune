@@ -1,0 +1,369 @@
+{
+  "schemaVersion": "1.0",
+  "reviewedAt": "2026-09-20",
+  "reviewPolicy": {
+    "minimumEvidenceSources": 1,
+    "rule": "每项优化至少需要一项公开技术依据；本机是否适用由本地硬件、系统版本和用户场景共同决定。",
+    "runtimeNetworkRequired": false,
+    "unknownBehavior": "数据不足时标记为无法判断，不自动视为适用。"
+  },
+  "evidence": {
+    "microsoft-windows": {
+      "title": "Windows 11 release information",
+      "url": "https://learn.microsoft.com/en-us/windows/release-health/windows11-release-information",
+      "kind": "official",
+      "supports": "Windows 版本和内部版本判断"
+    },
+    "microsoft-powercfg": {
+      "title": "Powercfg command-line options",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/design/device-experiences/powercfg-command-line-options",
+      "kind": "official",
+      "supports": "电源方案、处理器性能和 PCIe 电源设置"
+    },
+    "microsoft-bcd": {
+      "title": "BCD settings and BitLocker",
+      "url": "https://learn.microsoft.com/en-us/windows/security/operating-system-security/data-protection/bitlocker/bcd-settings-and-bitlocker",
+      "kind": "official",
+      "supports": "启动配置修改需要单独验证"
+    },
+    "microsoft-event41": {
+      "title": "Event ID 41: The system has rebooted without cleanly shutting down first",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/performance/event-id-41-restart",
+      "kind": "official",
+      "supports": "异常关机与蓝屏后的启动恢复判断"
+    },
+    "microsoft-tcp": {
+      "title": "Description of TCP/IP features",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/description-tcp-features",
+      "kind": "official",
+      "supports": "TCP 自动调优、时间戳和网络参数"
+    },
+    "ietf-rfc9293": {
+      "title": "RFC 9293: Transmission Control Protocol",
+      "url": "https://www.rfc-editor.org/rfc/rfc9293.html",
+      "kind": "standard",
+      "supports": "TCP 延迟确认与交互行为"
+    },
+    "microsoft-wddm": {
+      "title": "WDDM overview",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/display/windows-vista-display-driver-model-design-guide",
+      "kind": "official",
+      "supports": "WDDM 版本与 GPU 调度能力"
+    },
+    "microsoft-hags": {
+      "title": "D3DKMT_WDDM_2_7_CAPS",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/drivers/ddi/d3dkmdt/ns-d3dkmdt-d3dkmt_wddm_2_7_caps",
+      "kind": "official",
+      "supports": "硬件加速 GPU 调度需要 WDDM 2.7+"
+    },
+    "microsoft-storage": {
+      "title": "Optimize-Volume",
+      "url": "https://learn.microsoft.com/en-us/powershell/module/storage/optimize-volume",
+      "kind": "official",
+      "supports": "SSD TRIM 与存储维护边界"
+    },
+    "microsoft-fsutil": {
+      "title": "fsutil behavior",
+      "url": "https://learn.microsoft.com/en-us/windows-server/administration/windows-commands/fsutil-behavior",
+      "kind": "official",
+      "supports": "NTFS 删除通知和最后访问时间"
+    },
+    "microsoft-search": {
+      "title": "Fix problems in Windows Search",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-client/shell-experience/fix-problems-in-windows-search",
+      "kind": "official",
+      "supports": "Windows Search 索引依赖与影响"
+    },
+    "microsoft-print": {
+      "title": "Windows protected print mode",
+      "url": "https://learn.microsoft.com/en-us/windows/modern-print/windows-protected-print-mode/windows-protected-print-mode-for-enterprises",
+      "kind": "official",
+      "supports": "打印后台处理服务的功能依赖"
+    },
+    "microsoft-service-ports": {
+      "title": "Service overview and network port requirements",
+      "url": "https://learn.microsoft.com/en-us/troubleshoot/windows-server/networking/service-overview-and-network-port-requirements",
+      "kind": "official",
+      "supports": "Windows 服务、NetBIOS 和网络功能依赖"
+    },
+    "microsoft-memory": {
+      "title": "Win32_PhysicalMemory class",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/cimwin32prov/win32-physicalmemory",
+      "kind": "official",
+      "supports": "内存容量、额定频率、配置频率和电压字段"
+    },
+    "dmtf-smbios": {
+      "title": "DMTF SMBIOS Specification",
+      "url": "https://www.dmtf.org/standards/smbios",
+      "kind": "standard",
+      "supports": "内存设备的 SMBIOS 字段与公开数据边界"
+    },
+    "microsoft-hetero-power-scheduling": {
+      "title": "Hetero Power Scheduling - SchedulingPolicy",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/configuration-for-hetero-power-scheduling-schedulingpolicy",
+      "kind": "official",
+      "supports": "HETEROPOLICY、SCHEDPOLICY 和 SHORTSCHEDPOLICY 的 Windows 电源设置定义"
+    },
+    "microsoft-perfboostmode": {
+      "title": "Processor performance boost mode",
+      "url": "https://learn.microsoft.com/en-us/windows-hardware/customize/power-settings/options-for-perf-state-engine-perfboostmode",
+      "kind": "official",
+      "supports": "PERFBOOSTMODE 的性能提升模式定义和电源方案关系"
+    },
+    "microsoft-process-scheduling": {
+      "title": "Scheduling priorities",
+      "url": "https://learn.microsoft.com/en-us/windows/win32/procthread/scheduling-priorities",
+      "kind": "official",
+      "supports": "Windows 进程优先级、线程优先级和调度边界"
+    },
+    "microsoft-hvci": {
+      "title": "Enable virtualization-based protection of code integrity",
+      "url": "https://learn.microsoft.com/en-us/windows/security/hardware-security/enable-virtualization-based-protection-of-code-integrity",
+      "kind": "official",
+      "supports": "VBS、HVCI 和内存完整性的运行条件与安全边界"
+    }
+  },
+  "profiles": {
+    "windows-generic": {
+      "summary": "Windows 10/11 x64 通用设置",
+      "conditions": [
+        { "type": "osFamily", "values": ["Windows 10", "Windows 11"] },
+        { "type": "architecture", "values": ["x64"] }
+      ],
+      "evidenceIds": ["microsoft-windows"]
+    },
+    "power-desktop-preferred": {
+      "summary": "电源与处理器参数，台式机收益和稳定性更高",
+      "conditions": [
+        { "type": "osFamily", "values": ["Windows 10", "Windows 11"] },
+        { "type": "architecture", "values": ["x64"] },
+        { "type": "systemType", "values": ["Desktop"], "mode": "prefer" }
+      ],
+      "evidenceIds": ["microsoft-powercfg"]
+    },
+    "heterogeneous-power-policy": {
+      "summary": "仅按 Windows 内置方案恢复隐藏处理器调度基线，台式机优先且不做永久锁定承诺",
+      "conditions": [
+        { "type": "osFamily", "values": ["Windows 10", "Windows 11"] },
+        { "type": "architecture", "values": ["x64"] },
+        { "type": "systemType", "values": ["Desktop"], "mode": "prefer" },
+        { "type": "userDecision", "mode": "prefer", "message": "确认希望恢复隐藏处理器调度项，并接受游戏或厂商工具以后可能再次修改它们。" }
+      ],
+      "evidenceIds": ["microsoft-hetero-power-scheduling", "microsoft-perfboostmode"]
+    },
+    "ace-process-priority": {
+      "summary": "仅在检测到腾讯 ACE 组件时允许单独调整其 CPU 调度优先级",
+      "conditions": [
+        { "type": "osFamily", "values": ["Windows 10", "Windows 11"] },
+        { "type": "architecture", "values": ["x64"] },
+        { "type": "antiCheatExpertInstalled", "value": true }
+      ],
+      "evidenceIds": ["microsoft-process-scheduling"]
+    },
+    "game-process-priority": {
+      "summary": "必须选择具体游戏 EXE，且只允许 Normal 或 Above normal 优先级",
+      "conditions": [
+        { "type": "osFamily", "values": ["Windows 10", "Windows 11"] },
+        { "type": "architecture", "values": ["x64"] },
+        { "type": "selection", "kind": "ExecutablePriority" }
+      ],
+      "evidenceIds": ["microsoft-process-scheduling"]
+    },
+    "bcd-advanced": {
+      "summary": "需要重启验证，并依赖固件和主板计时器实现",
+      "conditions": [
+        { "type": "osFamily", "values": ["Windows 10", "Windows 11"] },
+        { "type": "architecture", "values": ["x64"] },
+        { "type": "userDecision", "mode": "prefer" }
+      ],
+      "evidenceIds": ["microsoft-bcd", "microsoft-event41"]
+    },
+    "network-adapter": {
+      "summary": "必须选择具体网卡并检查驱动属性",
+      "conditions": [
+        { "type": "osFamily", "values": ["Windows 10", "Windows 11"] },
+        { "type": "architecture", "values": ["x64"] },
+        { "type": "selection", "kind": "NetworkAdapter" }
+      ],
+      "evidenceIds": ["microsoft-tcp", "ietf-rfc9293"]
+    },
+    "network-experimental": {
+      "summary": "实验性网络参数，只适合明确进行对照测试的设备",
+      "conditions": [
+        { "type": "osFamily", "values": ["Windows 10", "Windows 11"] },
+        { "type": "architecture", "values": ["x64"] },
+        { "type": "userDecision", "mode": "prefer" }
+      ],
+      "evidenceIds": ["microsoft-tcp", "ietf-rfc9293"]
+    },
+    "network-netbios": {
+      "summary": "仅在设备不依赖旧式局域网发现和 NetBIOS 名称时适用",
+      "conditions": [
+        { "type": "osFamily", "values": ["Windows 10", "Windows 11"] },
+        { "type": "architecture", "values": ["x64"] },
+        { "type": "userDecision", "mode": "prefer", "message": "需确认局域网共享、NAS 和旧应用不依赖 NetBIOS。" }
+      ],
+      "evidenceIds": ["microsoft-service-ports"]
+    },
+    "graphics-amd": {
+      "summary": "仅适用于存在匹配 AMD 显示驱动子键的设备",
+      "conditions": [
+        { "type": "osFamily", "values": ["Windows 10", "Windows 11"] },
+        { "type": "architecture", "values": ["x64"] },
+        { "type": "gpuVendor", "values": ["AMD"] }
+      ],
+      "evidenceIds": ["microsoft-wddm"]
+    },
+    "graphics-hags": {
+      "summary": "Windows 10 2004+、WDDM 2.7+ 且显卡和驱动支持硬件加速调度",
+      "conditions": [
+        { "type": "osFamily", "values": ["Windows 10", "Windows 11"] },
+        { "type": "architecture", "values": ["x64"] },
+        { "type": "minimumBuild", "value": 19041 },
+        { "type": "gpuVendor", "values": ["AMD", "NVIDIA", "Intel"] },
+        { "type": "wddmMinimum", "value": 2.7 }
+      ],
+      "evidenceIds": ["microsoft-hags", "microsoft-wddm"]
+    },
+    "graphics-mpo": {
+      "summary": "仅作为已出现 MPO 闪烁、黑屏或卡顿后的故障规避项",
+      "conditions": [
+        { "type": "osFamily", "values": ["Windows 10", "Windows 11"] },
+        { "type": "architecture", "values": ["x64"] },
+        { "type": "userDecision", "mode": "prefer", "message": "正常显示设备不建议关闭 MPO，必须先确认问题可复现。" }
+      ],
+      "evidenceIds": ["microsoft-wddm"]
+    },
+    "graphics-program": {
+      "summary": "必须选择具体 EXE，并逐程序验证",
+      "conditions": [
+        { "type": "osFamily", "values": ["Windows 10", "Windows 11"] },
+        { "type": "architecture", "values": ["x64"] },
+        { "type": "selection", "kind": "ExecutablePath" }
+      ],
+      "evidenceIds": ["microsoft-wddm"]
+    },
+    "startup-selection": {
+      "summary": "必须选择具体启动项或允许列表服务",
+      "conditions": [
+        { "type": "osFamily", "values": ["Windows 10", "Windows 11"] },
+        { "type": "architecture", "values": ["x64"] },
+        { "type": "selection", "kind": "StartupOrService" }
+      ],
+      "evidenceIds": ["microsoft-service-ports"]
+    },
+    "hardware-selection": {
+      "summary": "必须结合具体设备、CPU 拓扑和中断共享情况逐项设置",
+      "conditions": [
+        { "type": "osFamily", "values": ["Windows 10", "Windows 11"] },
+        { "type": "architecture", "values": ["x64"] },
+        { "type": "selection", "kind": "Device" }
+      ],
+      "evidenceIds": ["microsoft-powercfg"]
+    },
+    "storage-ssd": {
+      "summary": "仅适用于系统盘为 SSD/NVMe 且存储控制器支持对应功能",
+      "conditions": [
+        { "type": "osFamily", "values": ["Windows 10", "Windows 11"] },
+        { "type": "architecture", "values": ["x64"] },
+        { "type": "systemDiskSsd", "value": true }
+      ],
+      "evidenceIds": ["microsoft-storage", "microsoft-fsutil"]
+    },
+    "sysmain-ssd": {
+      "summary": "SSD 且内存充足时更合适；机械盘或小内存设备不建议",
+      "conditions": [
+        { "type": "osFamily", "values": ["Windows 10", "Windows 11"] },
+        { "type": "architecture", "values": ["x64"] },
+        { "type": "systemDiskSsd", "value": true },
+        { "type": "minimumMemoryGiB", "value": 16, "mode": "prefer" }
+      ],
+      "evidenceIds": ["microsoft-storage", "microsoft-memory"]
+    },
+    "storage-ntfs": {
+      "summary": "要求系统使用 NTFS，并确认没有审计或取证依赖",
+      "conditions": [
+        { "type": "osFamily", "values": ["Windows 10", "Windows 11"] },
+        { "type": "architecture", "values": ["x64"] },
+        { "type": "fileSystem", "values": ["NTFS"] }
+      ],
+      "evidenceIds": ["microsoft-fsutil"]
+    },
+    "search-user-choice": {
+      "summary": "只有在用户不依赖系统搜索和文件索引时才适用",
+      "conditions": [
+        { "type": "osFamily", "values": ["Windows 10", "Windows 11"] },
+        { "type": "architecture", "values": ["x64"] },
+        { "type": "userDecision", "mode": "prefer", "message": "需确认开始菜单、文件资源管理器和 Outlook 搜索可接受变慢或停用。" }
+      ],
+      "evidenceIds": ["microsoft-search"]
+    },
+    "printer-aware": {
+      "summary": "检测到打印机或扫描设备时需要人工确认是否仍要停用",
+      "conditions": [
+        { "type": "osFamily", "values": ["Windows 10", "Windows 11"] },
+        { "type": "architecture", "values": ["x64"] },
+        { "type": "printerCountMaximum", "value": 0, "mode": "prefer" }
+      ],
+      "evidenceIds": ["microsoft-print"]
+    },
+    "domain-aware": {
+      "summary": "企业域设备应先遵循组织诊断与遥测策略",
+      "conditions": [
+        { "type": "osFamily", "values": ["Windows 10", "Windows 11"] },
+        { "type": "architecture", "values": ["x64"] },
+        { "type": "domainJoined", "value": false, "mode": "prefer" }
+      ],
+      "evidenceIds": ["microsoft-service-ports"]
+    },
+    "startup-delay-ssd": {
+      "summary": "SSD 设备更适合，机械盘和大量启动项需要先测试",
+      "conditions": [
+        { "type": "osFamily", "values": ["Windows 10", "Windows 11"] },
+        { "type": "architecture", "values": ["x64"] },
+        { "type": "systemDiskSsd", "value": true, "mode": "prefer" }
+      ],
+      "evidenceIds": ["microsoft-storage"]
+    }
+  },
+  "rules": {
+    "power-plan": { "profile": "windows-generic", "batchEligible": true },
+    "power-processor-min": { "profile": "power-desktop-preferred", "batchEligible": true },
+    "power-usb-suspend": { "profile": "windows-generic", "batchEligible": true },
+    "power-pcie-aspm": { "profile": "power-desktop-preferred", "batchEligible": true },
+    "scheduler-priority-separation": { "profile": "windows-generic", "batchEligible": true },
+    "scheduler-multimedia": { "profile": "windows-generic", "batchEligible": true },
+    "scheduler-bcd-timers": { "profile": "bcd-advanced", "batchEligible": false },
+    "network-nic-power": { "profile": "network-adapter", "batchEligible": false },
+    "network-tcp-autotuning": { "profile": "network-experimental", "batchEligible": false },
+    "network-tcp-timestamps": { "profile": "network-experimental", "batchEligible": true },
+    "network-dns": { "profile": "network-adapter", "batchEligible": false },
+    "graphics-amd-pstate": { "profile": "graphics-amd", "batchEligible": true },
+    "startup-toggle": { "profile": "startup-selection", "batchEligible": false },
+    "services-allowlist": { "profile": "startup-selection", "batchEligible": false },
+    "storage-temp-quarantine": { "profile": "windows-generic", "batchEligible": true },
+    "hardware-device-affinity": { "profile": "hardware-selection", "batchEligible": false },
+    "power-core-parking-min": { "profile": "power-desktop-preferred", "batchEligible": true },
+    "power-cpu-idle-disable": { "profile": "power-desktop-preferred", "batchEligible": true },
+    "power-heterogeneous-policy-drift": { "profile": "heterogeneous-power-policy", "batchEligible": false },
+    "process-priority-ace": { "profile": "ace-process-priority", "batchEligible": false },
+    "process-priority-game": { "profile": "game-process-priority", "batchEligible": false },
+    "input-mouse-acceleration": { "profile": "windows-generic", "batchEligible": true },
+    "graphics-game-mode": { "profile": "windows-generic", "batchEligible": true },
+    "graphics-game-dvr-disable": { "profile": "windows-generic", "batchEligible": true },
+    "graphics-hags": { "profile": "graphics-hags", "batchEligible": true },
+    "graphics-mpo-disable": { "profile": "graphics-mpo", "batchEligible": false },
+    "graphics-fullscreen-optimizations": { "profile": "graphics-program", "batchEligible": false },
+    "network-nagle-disable": { "profile": "network-adapter", "batchEligible": false },
+    "network-netbios-disable": { "profile": "network-netbios", "batchEligible": false },
+    "network-interrupt-moderation-disable": { "profile": "network-adapter", "batchEligible": false },
+    "storage-trim-enable": { "profile": "storage-ssd", "batchEligible": true },
+    "storage-last-access-disable": { "profile": "storage-ntfs", "batchEligible": true },
+    "services-sysmain-disable": { "profile": "sysmain-ssd", "batchEligible": true },
+    "services-windows-search-disable": { "profile": "search-user-choice", "batchEligible": false },
+    "services-print-spooler-disable": { "profile": "printer-aware", "batchEligible": false },
+    "services-diagtrack-disable": { "profile": "domain-aware", "batchEligible": true },
+    "system-ui-animations": { "profile": "windows-generic", "batchEligible": true },
+    "system-startup-delay": { "profile": "startup-delay-ssd", "batchEligible": true }
+  }
+}

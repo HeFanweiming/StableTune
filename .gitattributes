@@ -1,0 +1,16 @@
+* text=auto
+
+*.ps1 text eol=crlf
+*.psd1 text eol=crlf
+*.psm1 text eol=crlf
+*.cmd text eol=crlf
+*.md text eol=lf
+*.json text eol=lf
+*.jsonl text eol=lf
+*.sha256 text eol=lf
+
+*.zip binary
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.ico binary

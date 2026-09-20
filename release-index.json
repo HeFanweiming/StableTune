@@ -1,0 +1,25 @@
+{
+  "schemaVersion": "1.0",
+  "repository": "https://github.com/HeFanweiming/StableTune",
+  "currentVersion": "0.1.9.1",
+  "lineage": {
+    "startsAt": "0.1.9.1",
+    "policy": "single-version-public-release",
+    "retainedArtifacts": "current-only"
+  },
+  "compatibility": {
+    "os": "Windows 10/11 x64",
+    "shell": "PowerShell 7.4+",
+    "interface": "Qt 6 Widgets / WPF"
+  },
+  "releases": [
+    {
+      "version": "0.1.9.1",
+      "buildDate": "20260920",
+      "status": "current",
+      "artifact": "dist/StableTune-prototype-v0.1.9.1-20260920.zip",
+      "artifactPresent": true,
+      "sha256": "31093FAA03376532C553F61923C007BB60DF027C6CE516508AA242882EC9F44A"
+    }
+  ]
+}

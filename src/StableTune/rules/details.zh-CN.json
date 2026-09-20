@@ -1,0 +1,599 @@
+{
+  "schemaVersion": "1.0",
+  "rules": {
+    "power-plan": {
+      "benefits": ["避免直接改动系统自带电源方案，可单独启用低延迟方案。", "恢复时可切回原方案并删除程序创建的计划。"],
+      "drawbacks": ["部分游戏和厂商工具可能再次切换电源方案。", "没有统一验证所有硬件的性能提升。"],
+      "compatibility": {
+        "scope": "通用",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "不适用"
+      }
+    },
+    "power-processor-min": {
+      "benefits": ["减少处理器频率快速升降造成的响应波动。", "有助于维持较稳定的调度状态。"],
+      "drawbacks": ["增加待机功耗、发热和风扇噪声。", "笔记本续航会明显下降。"],
+      "compatibility": {
+        "scope": "通用，但笔记本需谨慎",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "Intel、AMD 通用",
+        "cpuSeries": "通用；不同固件可能忽略该设置",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "不适用"
+      }
+    },
+    "power-usb-suspend": {
+      "benefits": ["降低 USB 设备空闲后恢复的延迟。", "减少键盘、鼠标或接收器短暂失联的概率。"],
+      "drawbacks": ["USB 设备待机功耗增加。", "笔记本电池使用时间可能缩短。"],
+      "compatibility": {
+        "scope": "通用",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "USB 键盘、鼠标、接收器或扩展坞"
+      }
+    },
+    "power-pcie-aspm": {
+      "benefits": ["减少 PCIe 链路降速和唤醒延迟。", "可能降低存储、网卡和显卡的响应抖动。"],
+      "drawbacks": ["提高待机功耗和温度。", "笔记本续航下降明显。"],
+      "compatibility": {
+        "scope": "通用，但受平台固件影响",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "Intel、AMD 通用",
+        "cpuSeries": "通用；部分平台由 BIOS 控制",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "PCIe SSD、PCIe 网卡等",
+        "device": "PCIe 设备"
+      }
+    },
+    "scheduler-priority-separation": {
+      "benefits": ["增强前台程序调度权重。", "可能改善短时间片下的输入响应。"],
+      "drawbacks": ["后台任务可能被更明显地延后。", "部分专业软件或服务器场景不适合。"],
+      "compatibility": {
+        "scope": "通用",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "Intel、AMD 通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "不适用"
+      }
+    },
+    "scheduler-multimedia": {
+      "benefits": ["取消多媒体网络节流并减少系统预留响应预算。", "可能降低音频、视频和游戏线程的调度延迟。"],
+      "drawbacks": ["后台多媒体任务可能受到更大竞争。", "低配置电脑可能增加卡顿。"],
+      "compatibility": {
+        "scope": "通用",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "Intel、AMD 通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "不适用"
+      }
+    },
+    "scheduler-bcd-timers": {
+      "benefits": ["调整系统计时器策略，重启后可能减少计时器合并抖动。"],
+      "drawbacks": ["需要重启且不同平台效果不一致。", "极少数设备可能出现计时或性能异常。"],
+      "compatibility": {
+        "scope": "条件适用",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "Intel、AMD 通用",
+        "cpuSeries": "通用；芯片组和固件会影响实际效果",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "需要可写 BCD"
+      }
+    },
+    "network-nic-power": {
+      "benefits": ["避免网卡在空闲时被系统关闭。", "可能减少唤醒延迟和短暂丢包。"],
+      "drawbacks": ["提高网卡待机功耗。", "笔记本续航可能下降。"],
+      "compatibility": {
+        "scope": "通用，需选择网卡",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "有线或无线网络适配器"
+      }
+    },
+    "network-tcp-autotuning": {
+      "benefits": ["使用实验性接收窗口自动调优级别。", "部分高带宽或高延迟连接可能改善吞吐。"],
+      "drawbacks": ["实验性设置在部分网络中反而不稳定。", "可能影响下载、VPN 和远程桌面体验。"],
+      "compatibility": {
+        "scope": "通用",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "网络适配器"
+      }
+    },
+    "network-tcp-timestamps": {
+      "benefits": ["启用更精确的 TCP 往返时间测量。"],
+      "drawbacks": ["会增加少量 TCP 头部开销。", "少数老旧中间网络设备兼容性较差。"],
+      "compatibility": {
+        "scope": "通用",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "网络适配器"
+      }
+    },
+    "network-dns": {
+      "benefits": ["为指定网卡恢复 DHCP DNS 或应用地区 DNS 预设。", "便于排除 DNS 解析慢和污染问题。"],
+      "drawbacks": ["公共 DNS 可能距离更远或影响本地域名。", "部分校园网、企业网和运营商内网服务依赖原 DNS。"],
+      "compatibility": {
+        "scope": "通用，需选择网卡",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "网络适配器"
+      }
+    },
+    "graphics-amd-pstate": {
+      "benefits": ["针对特定 AMD 驱动子键关闭动态 P-State。", "可能恢复受影响显卡的完整性能状态。"],
+      "drawbacks": ["仅适用于匹配的 AMD 驱动和显卡。", "错误机型上无效或增加功耗。"],
+      "compatibility": {
+        "scope": "条件适用",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "AMD Radeon",
+        "gpuDriver": "检测到匹配的 AMD 显示驱动子键",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "AMD 显示适配器"
+      }
+    },
+    "startup-toggle": {
+      "benefits": ["减少登录阶段自动启动的程序。", "每项启动项都保留原始注册表内容和位置。"],
+      "drawbacks": ["禁用的程序可能不再自动同步、更新或提供后台功能。", "部分安全软件被禁用后会降低保护。"],
+      "compatibility": {
+        "scope": "通用，需选择启动项",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "通用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "受支持的 Run/RunOnce 注册表启动项"
+      }
+    },
+    "services-allowlist": {
+      "benefits": ["只允许调整经过审核的服务。", "保存原启动类型和运行状态，可逐项恢复。"],
+      "drawbacks": ["禁用服务可能影响搜索、打印、Xbox 或诊断功能。", "启动类型与系统策略冲突时可能被自动改回。"],
+      "compatibility": {
+        "scope": "条件适用，需选择允许列表服务",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "通用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "允许列表中的 Windows 服务"
+      }
+    },
+    "storage-temp-quarantine": {
+      "benefits": ["把旧临时文件移入隔离区而不是直接删除。", "恢复时逐文件移回原路径。"],
+      "drawbacks": ["隔离区仍占用磁盘空间。", "正在使用或受保护的文件会被跳过。"],
+      "compatibility": {
+        "scope": "通用",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "需要足够空间保存隔离文件",
+        "device": "不适用"
+      }
+    },
+    "hardware-device-affinity": {
+      "benefits": ["可把指定设备中断绑定到选定 CPU 核心。", "保存原策略和 CPU 掩码，便于恢复。"],
+      "drawbacks": ["错误掩码可能造成设备卡顿或中断竞争。", "不同 CPU 拓扑、芯片组和驱动结果差异很大。"],
+      "compatibility": {
+        "scope": "条件适用，需逐设备设置",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "Intel、AMD 通用",
+        "cpuSeries": "通用，但核心拓扑必须由用户确认",
+        "gpuBrand": "通用",
+        "gpuDriver": "取决于设备驱动是否公开中断策略",
+        "memory": "通用，型号和容量不限",
+        "storage": "不适用",
+        "device": "HPET、键盘、鼠标、GPU、网卡或 USB 设备"
+      }
+    },
+    "power-core-parking-min": {
+      "benefits": ["减少核心解除停放造成的调度唤醒延迟。", "适合对帧时间和输入延迟敏感的台式机。"],
+      "drawbacks": ["提高空闲功耗、温度和风扇转速。", "笔记本续航下降；部分 Intel 大小核平台可能忽略设置。"],
+      "compatibility": {
+        "scope": "通用，受电源方案和固件影响",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "Intel、AMD 通用",
+        "cpuSeries": "通用；部分大小核或移动平台可能不支持",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "不适用"
+      }
+    },
+    "power-cpu-idle-disable": {
+      "benefits": ["减少处理器进入和退出空闲状态的延迟。", "可能降低唤醒抖动。"],
+      "drawbacks": ["空闲功耗和温度显著增加。", "笔记本续航明显下降，部分固件会忽略该设置。"],
+      "compatibility": {
+        "scope": "条件适用",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "Intel、AMD 通用",
+        "cpuSeries": "通用；移动平台和部分服务器平台不建议",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "ACPI 与固件需允许修改空闲状态"
+      }
+    },
+    "power-heterogeneous-policy-drift": {
+      "benefits": [
+        "将异类调度和性能提升模式恢复到 Windows 内置方案的已知基线，而不是猜测固定数值。",
+        "可修复部分游戏或厂商工具改写隐藏电源项后留下的配置漂移。",
+        "修改前保存当前活动方案的 4 组 AC/DC 值，可按原电源方案精确恢复。"
+      ],
+      "drawbacks": [
+        "游戏、启动器或厂商控制面板之后仍可能再次改写这些隐藏项，无法保证永久锁定。",
+        "不同 Windows 版本、CPU 调度器和电源方案的实际行为可能不同。",
+        "该操作不适合与第三方“电源计划锁定”工具同时使用。"
+      ],
+      "compatibility": {
+        "scope": "高级、逐项使用",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "Intel、AMD 通用",
+        "cpuSeries": "通用；受 Windows 和固件调度实现影响",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "系统必须能读取完整的内置高性能或平衡方案基线"
+      }
+    },
+    "process-priority-ace": {
+      "benefits": [
+        "仅将 SGuard64.exe 和 SGuardSvc64.exe 的 CPU 优先级设为 Idle。",
+        "保留反作弊程序和文件不变，只保存并恢复 IFEO 中对应的 CPU 优先级值。",
+        "可作为检测到 ACE 组件后的可控对照测试，而不是全局服务或安全功能禁用。"
+      ],
+      "drawbacks": [
+        "反作弊或游戏更新可能新增、重命名或绕过相关进程，固定进程名未必持续有效。",
+        "修改反作弊相关兼容性参数可能不符合游戏支持政策，使用前应确认最新规则。",
+        "不同版本 ACE、操作系统和游戏组合的实际调度效果可能不同。"
+      ],
+      "compatibility": {
+        "scope": "仅在检测到腾讯 ACE 时适用",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "Intel、AMD 通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "检测到 AntiCheatExpert 目录或 SGuard64/SGuardSvc64 进程"
+      }
+    },
+    "process-priority-game": {
+      "benefits": [
+        "按用户选择的游戏 EXE 设置 Normal 或 Above normal CPU 优先级。",
+        "按程序保存原值，可只恢复该 EXE 而不影响其他应用。",
+        "避免 Realtime 和 High 等可能抢占系统关键线程的危险优先级。"
+      ],
+      "drawbacks": [
+        "提高游戏优先级不一定提升帧率，反而可能挤压录制、语音和后台必要任务。",
+        "不同游戏引擎、反作弊和 CPU 拓扑对优先级的响应差异很大。",
+        "游戏更新后可能更换 EXE 名称或路径，需要重新检查和设置。"
+      ],
+      "compatibility": {
+        "scope": "高级、按程序设置",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "Intel、AMD 通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "NVIDIA、AMD、Intel 通用",
+        "gpuDriver": "不限定",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "用户选择的游戏或应用 EXE"
+      }
+    },
+    "input-mouse-acceleration": {
+      "benefits": ["关闭增强指针精度，使鼠标位移更接近原始输入。", "对需要稳定瞄准的用户更直观。"],
+      "drawbacks": ["桌面移动手感会立即改变。", "习惯系统加速度的用户可能觉得指针更难操作。"],
+      "compatibility": {
+        "scope": "通用",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "鼠标、触摸板或其他指针设备"
+      }
+    },
+    "graphics-game-mode": {
+      "benefits": ["让 Windows 在游戏运行时减少后台干扰。", "无需第三方工具即可启用。"],
+      "drawbacks": ["少数游戏或录屏软件与游戏模式存在兼容问题。", "后台更新、压缩和录制任务可能被延后。"],
+      "compatibility": {
+        "scope": "通用",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "Intel、AMD 通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "NVIDIA、AMD、Intel 通用",
+        "gpuDriver": "不限定",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "不适用"
+      }
+    },
+    "graphics-game-dvr-disable": {
+      "benefits": ["减少 Xbox Game Bar 后台捕获钩子和录制开销。", "可能减少部分游戏与录制覆盖层的冲突。"],
+      "drawbacks": ["无法使用后台录制、即时重放和捕获最近片段。", "依赖 Game Bar 截屏或录制的用户不应关闭。"],
+      "compatibility": {
+        "scope": "通用",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "Intel、AMD 通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "NVIDIA、AMD、Intel 通用",
+        "gpuDriver": "不限定；仍可能与其他录屏软件冲突",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "需要 Xbox Game Bar 录制功能时不适用"
+      }
+    },
+    "graphics-hags": {
+      "benefits": ["启用 WDDM 的 GPU 硬件加速调度。", "部分游戏可降低帧提交延迟。"],
+      "drawbacks": ["需要重启，且不是所有显卡或驱动都支持。", "少数游戏、录屏和覆盖层软件可能出现卡顿或黑屏。"],
+      "compatibility": {
+        "scope": "条件适用",
+        "os": "Windows 10 2004+ 或 Windows 11 x64",
+        "cpuBrand": "Intel、AMD 通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "NVIDIA、AMD、Intel 均可能支持",
+        "gpuDriver": "需要 WDDM 2.7+ 且驱动公开硬件调度支持",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "支持硬件加速调度的 GPU"
+      }
+    },
+    "graphics-mpo-disable": {
+      "benefits": ["规避部分 GPU 驱动导致的多平面覆盖闪烁、黑屏和卡顿。", "对多显示器和高刷新率异常有时有效。"],
+      "drawbacks": ["并非通用优化，正常设备关闭后可能增加功耗或引入撕裂。", "部分 HDR、截图、录屏和多显示器组合可能受影响。"],
+      "compatibility": {
+        "scope": "仅问题设备使用",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "NVIDIA、AMD、Intel 均出现过 MPO 问题",
+        "gpuDriver": "具体取决于驱动版本和显示器组合",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "多显示器、HDR 或高刷新率显示环境"
+      }
+    },
+    "graphics-fullscreen-optimizations": {
+      "benefits": ["对所选 EXE 关闭 Windows 全屏优化。", "部分游戏在独占全屏下可获得更低延迟。"],
+      "drawbacks": ["切换窗口可能更慢。", "录屏、覆盖层、HDR 和截图工具可能失效或黑屏。"],
+      "compatibility": {
+        "scope": "按程序设置",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "NVIDIA、AMD、Intel 通用",
+        "gpuDriver": "取决于游戏和驱动",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "用户指定的游戏或应用 EXE"
+      }
+    },
+    "network-nagle-disable": {
+      "benefits": ["降低小数据包等待合并造成的时间延迟。", "部分网络游戏的输入到服务器往返可能更稳定。"],
+      "drawbacks": ["增加包数量和 CPU/网络开销。", "大量小包场景可能降低有效吞吐和电池续航。"],
+      "compatibility": {
+        "scope": "通用，需选择网卡",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "有线或无线网络适配器"
+      }
+    },
+    "network-netbios-disable": {
+      "benefits": ["减少局域网广播和旧式名称解析暴露。", "可降低部分网络环境中的干扰。"],
+      "drawbacks": ["可能影响旧式网上邻居、文件共享和局域网游戏发现。", "依赖 NetBIOS 名称的企业应用可能无法工作。"],
+      "compatibility": {
+        "scope": "条件适用，需选择网卡",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "网络适配器"
+      }
+    },
+    "network-interrupt-moderation-disable": {
+      "benefits": ["降低网卡中断合并造成的尾部延迟。", "可能改善竞技游戏的小包响应。"],
+      "drawbacks": ["中断频率提高会增加 CPU 占用。", "高吞吐下载或直播场景可能降低效率。"],
+      "compatibility": {
+        "scope": "条件适用，需选择网卡",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "Intel、AMD 通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "网卡品牌不限，但驱动必须公开 Interrupt Moderation 高级属性"
+      }
+    },
+    "storage-trim-enable": {
+      "benefits": ["保持 SSD 删除块的回收效率。", "长期使用可减少写入放大和性能下降。"],
+      "drawbacks": ["极老的 SSD、某些 RAID 控制器或虚拟磁盘可能不支持 TRIM。", "不适用机械硬盘。"],
+      "compatibility": {
+        "scope": "条件适用",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "SSD 或 NVMe；机械硬盘不适用",
+        "device": "存储控制器需支持 TRIM"
+      }
+    },
+    "storage-last-access-disable": {
+      "benefits": ["减少 NTFS 为文件访问时间产生的少量元数据写入。", "现代系统通常默认已经关闭。"],
+      "drawbacks": ["依赖最后访问时间的备份、审计或取证工具可能失效。", "对多数 SSD 的实际性能提升有限。"],
+      "compatibility": {
+        "scope": "通用",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "NTFS 卷",
+        "device": "不适用"
+      }
+    },
+    "services-sysmain-disable": {
+      "benefits": ["减少后台预读、内存缓存和磁盘活动。", "SSD 系统上很多用户不会感受到明显功能损失。"],
+      "drawbacks": ["机械硬盘和小内存设备可能启动应用更慢。", "系统预加载和应用缓存行为会改变。"],
+      "compatibility": {
+        "scope": "建议 SSD 设备使用",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "建议 16 GB 或以上，内存不足时不要禁用",
+        "storage": "SSD/NVMe 建议；机械硬盘不建议",
+        "device": "不适用"
+      }
+    },
+    "services-windows-search-disable": {
+      "benefits": ["减少索引产生的磁盘、CPU 和内存活动。", "对从不使用系统搜索的用户可减少后台负载。"],
+      "drawbacks": ["开始菜单、文件管理器、Outlook 和部分应用搜索会变慢。", "索引恢复后需要时间重新建立。"],
+      "compatibility": {
+        "scope": "条件适用",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "SSD 或机械硬盘均可，SSD 上收益通常更小",
+        "device": "不依赖 Windows Search 的工作流程"
+      }
+    },
+    "services-print-spooler-disable": {
+      "benefits": ["减少一个常驻服务和部分安全暴露面。", "不接打印机的专用游戏或办公设备可减少后台负载。"],
+      "drawbacks": ["无法打印、扫描或使用虚拟打印机。", "部分第三方软件安装和文档导出可能依赖该服务。"],
+      "compatibility": {
+        "scope": "仅无打印需求设备",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "不得连接实体打印机、扫描仪或依赖虚拟打印机"
+      }
+    },
+    "services-diagtrack-disable": {
+      "benefits": ["减少诊断遥测相关后台活动。", "降低部分设备的持续网络和磁盘访问。"],
+      "drawbacks": ["系统诊断、企业合规和部分支持工具可能缺少数据。", "系统更新可能重新启用或恢复该服务。"],
+      "compatibility": {
+        "scope": "条件适用",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "非企业集中管理设备"
+      }
+    },
+    "system-ui-animations": {
+      "benefits": ["减少菜单、任务栏、缩略图和 DWM 动画开销。", "界面响应看起来更直接。"],
+      "drawbacks": ["视觉动效减少，部分用户会觉得体验生硬。", "动画对视觉提示和可访问性有价值的用户不应关闭。"],
+      "compatibility": {
+        "scope": "通用",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "NVIDIA、AMD、Intel 通用",
+        "gpuDriver": "不限定",
+        "memory": "通用，型号和容量不限",
+        "storage": "通用",
+        "device": "不适用"
+      }
+    },
+    "system-startup-delay": {
+      "benefits": ["取消 Explorer 登录后启动项的固定等待。", "部分启动程序会更早出现。"],
+      "drawbacks": ["登录阶段短时间内竞争更集中。", "机械硬盘或启动项很多的系统可能感觉桌面更慢。"],
+      "compatibility": {
+        "scope": "通用",
+        "os": "Windows 10/11 x64",
+        "cpuBrand": "通用",
+        "cpuSeries": "通用",
+        "gpuBrand": "不适用",
+        "gpuDriver": "不适用",
+        "memory": "通用，型号和容量不限",
+        "storage": "SSD 推荐；机械硬盘效果可能不同",
+        "device": "不适用"
+      }
+    }
+  }
+}

@@ -1,0 +1,35 @@
+# Runtime and local state
+*.tmp
+*.temp
+*.log
+*.bak
+*.orig
+*.rej
+
+# Test and coverage output
+TestResults/
+TestDrive/
+coverage/
+artifacts/
+pester-results*.xml
+
+# IDE and user settings
+.vs/
+.vscode/
+.idea/
+*.suo
+*.user
+*.rsuser
+
+# Build intermediates
+bin/
+obj/
+
+# Locally extracted release packages
+dist/*/
+
+# Local C++/Qt build tooling and outputs
+tmp/qt-build-*/
+tmp/qt-install-*/
+tmp/qt-sdk/
+tmp/qt-tools/
