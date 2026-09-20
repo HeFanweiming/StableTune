@@ -1,6 +1,6 @@
 @{
     RootModule        = 'StableTune.psm1'
-    ModuleVersion     = '0.1.9.1'
+    ModuleVersion     = '0.1.9.2'
     GUID              = 'a91f7f71-68af-4d51-80f4-093c4932141c'
     Author            = 'OpenAI Codex'
     CompanyName       = 'StableTune'

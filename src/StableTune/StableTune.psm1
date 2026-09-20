@@ -1,7 +1,7 @@
 Set-StrictMode -Version Latest
 
 $script:ModuleRoot = $PSScriptRoot
-$script:ModuleVersion = '0.1.9.1'
+$script:ModuleVersion = '0.1.9.2'
 $script:CatalogPath = Join-Path $PSScriptRoot 'rules\catalog.json'
 $script:RuleDetailsPath = Join-Path $PSScriptRoot 'rules\details.zh-CN.json'
 $script:RuleGuidancePath = Join-Path $PSScriptRoot 'rules\guidance.zh-CN.json'

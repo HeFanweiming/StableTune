@@ -1,7 +1,7 @@
 {
   "schemaVersion": "1.0",
   "repository": "https://github.com/HeFanweiming/StableTune",
-  "currentVersion": "0.1.9.1",
+  "currentVersion": "0.1.9.2",
   "lineage": {
     "startsAt": "0.1.9.1",
     "policy": "single-version-public-release",
@@ -14,12 +14,12 @@
   },
   "releases": [
     {
-      "version": "0.1.9.1",
+      "version": "0.1.9.2",
       "buildDate": "20260920",
       "status": "current",
-      "artifact": "dist/StableTune-prototype-v0.1.9.1-20260920.zip",
+      "artifact": "dist/StableTune-prototype-v0.1.9.2-20260920.zip",
       "artifactPresent": true,
-      "sha256": "31093FAA03376532C553F61923C007BB60DF027C6CE516508AA242882EC9F44A"
+      "sha256": "C960E588958224C2B9CB446C56202C8EAE1F21D2B376D9B60B53302E42B574B2"
     }
   ]
 }

@@ -68,10 +68,12 @@ foreach ($release in @($index.releases)) {
 
 $requiredPaths = @(
     'Build-Release.ps1',
+    'Build-PortableRelease.ps1',
     'CHANGELOG.md',
     'CURRENT-RELEASE.md',
     'StableTune.ps1',
     'Start-StableTune.cmd',
+    'tools\Start-StableTunePortable.cmd',
     'src\StableTune\StableTune.psd1',
     'src\StableTune\CrashRecoveryWorker.ps1',
     'src\StableTune\rules\applicability.zh-CN.json',
@@ -89,6 +91,19 @@ foreach ($relativePath in $requiredPaths) {
     $fullPath = Join-Path $repoRoot $relativePath
     if (-not (Test-Path -LiteralPath $fullPath)) {
         throw "Required repository path is missing: $relativePath"
+    }
+}
+
+foreach ($relativePath in @('Start-StableTune.cmd', 'tools\Start-StableTunePortable.cmd')) {
+    $launcherPath = Join-Path $repoRoot $relativePath
+    $bytes = [System.IO.File]::ReadAllBytes($launcherPath)
+    for ($byteIndex = 0; $byteIndex -lt $bytes.Length; $byteIndex++) {
+        if ($bytes[$byteIndex] -eq 10 -and ($byteIndex -eq 0 -or $bytes[$byteIndex - 1] -ne 13)) {
+            throw "Windows command launcher '$relativePath' must use CRLF line endings."
+        }
+        if ($bytes[$byteIndex] -ge 128) {
+            throw "Windows command launcher '$relativePath' must contain ASCII text only."
+        }
     }
 }
 

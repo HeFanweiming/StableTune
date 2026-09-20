@@ -1,16 +1,29 @@
 @echo off
 setlocal EnableExtensions
 
-set "APP=%~dp0bin\StableTune.exe"
+set "ROOT=%~dp0"
+if exist "%ROOT%bin\StableTune.exe" goto launch
 
-if not exist "%APP%" (
-    echo.
-    echo [稳优 StableTune] Program file not found:
-    echo %APP%
-    echo.
-    pause
-    exit /b 2
-)
+set "ROOT=%~dp0..\"
+if exist "%ROOT%bin\StableTune.exe" goto launch
 
-start "" "%APP%"
+echo.
+echo [StableTune] Program file not found.
+echo Checked:
+echo   %~dp0bin\StableTune.exe
+echo   %~dp0..\bin\StableTune.exe
+echo.
+pause
+exit /b 2
+
+:launch
+set "APP=%ROOT%bin\StableTune.exe"
+if "%~1"=="" goto background
+
+"%APP%" %*
+set "EXIT_CODE=%ERRORLEVEL%"
+exit /b %EXIT_CODE%
+
+:background
+start "" /D "%ROOT%" "%APP%"
 exit /b 0

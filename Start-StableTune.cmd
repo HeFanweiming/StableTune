@@ -7,13 +7,13 @@ set "PWSH="
 fltmc.exe >nul 2>&1
 if errorlevel 1 (
     echo.
-    echo [稳优 StableTune] Requesting administrator privileges...
+    echo [StableTune] Requesting administrator privileges...
     set "FELIX_LAUNCHER=%~f0"
     set "FELIX_LAUNCH_ARGS=%*"
-    powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -Command "try { if ([string]::IsNullOrWhiteSpace($env:FELIX_LAUNCH_ARGS)) { Start-Process -FilePath $env:FELIX_LAUNCHER -Verb RunAs -ErrorAction Stop } else { Start-Process -FilePath $env:FELIX_LAUNCHER -ArgumentList $env:FELIX_LAUNCH_ARGS -Verb RunAs -ErrorAction Stop } } catch { Write-Host '[稳优 StableTune] Administrator launch was cancelled or failed.'; Write-Host $_.Exception.Message; exit 1 }"
+    powershell.exe -NoLogo -NoProfile -ExecutionPolicy Bypass -Command "try { if ([string]::IsNullOrWhiteSpace($env:FELIX_LAUNCH_ARGS)) { Start-Process -FilePath $env:FELIX_LAUNCHER -Verb RunAs -ErrorAction Stop } else { Start-Process -FilePath $env:FELIX_LAUNCHER -ArgumentList $env:FELIX_LAUNCH_ARGS -Verb RunAs -ErrorAction Stop } } catch { Write-Host '[StableTune] Administrator launch was cancelled or failed.'; Write-Host $_.Exception.Message; exit 1 }"
     if errorlevel 1 (
         echo.
-        echo [稳优 StableTune] Administrator privileges were not granted.
+        echo [StableTune] Administrator privileges were not granted.
         pause
         exit /b 5
     )
@@ -32,7 +32,7 @@ if not defined PWSH if exist "%USERPROFILE%\.cache\codex-runtimes\codex-primary-
 
 if not exist "%SCRIPT%" (
     echo.
-    echo [稳优 StableTune] Main script not found:
+    echo [StableTune] Main script not found:
     echo %SCRIPT%
     echo.
     pause
@@ -41,7 +41,7 @@ if not exist "%SCRIPT%" (
 
 if not defined PWSH (
     echo.
-    echo [稳优 StableTune] PowerShell 7 was not found.
+    echo [StableTune] PowerShell 7 was not found.
     echo.
     echo Install PowerShell 7 with:
     echo   winget install --id Microsoft.PowerShell --source winget
@@ -52,18 +52,16 @@ if not defined PWSH (
     exit /b 1
 )
 
-echo [稳优 StableTune] Using PowerShell 7:
-echo %PWSH%
-echo.
-
 set "IS_ADMIN=No"
 fltmc.exe >nul 2>&1 && set "IS_ADMIN=Yes"
-echo [稳优 StableTune] Administrator privileges: %IS_ADMIN%
 if "%IS_ADMIN%"=="No" (
-    echo [稳优 StableTune] Administrator privileges are required to open the program.
+    echo [StableTune] Administrator privileges are required to open the program.
     pause
     exit /b 5
 )
+
+echo [StableTune] Using PowerShell 7:
+echo %PWSH%
 echo.
 
 "%PWSH%" -NoLogo -NoProfile -ExecutionPolicy Bypass -File "%SCRIPT%" %*
@@ -71,7 +69,7 @@ set "EXIT_CODE=%ERRORLEVEL%"
 
 if not "%EXIT_CODE%"=="0" (
     echo.
-    echo [稳优 StableTune] The program exited with code %EXIT_CODE%.
+    echo [StableTune] The program exited with code %EXIT_CODE%.
     echo Keep this window open and capture the error message for diagnosis.
     echo.
     pause

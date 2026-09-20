@@ -722,6 +722,33 @@ Describe '稳优 StableTune safeguards' {
         $launcher | Should Match 'fltmc\.exe'
     }
 
+    It 'keeps Windows command launchers compatible with cmd.exe' {
+        $launcherPaths = @(
+            (Join-Path $repoRoot 'Start-StableTune.cmd'),
+            (Join-Path $repoRoot 'tools\Start-StableTunePortable.cmd')
+        ) | Where-Object { Test-Path -LiteralPath $_ }
+
+        $launcherPaths.Count | Should BeGreaterThan 0
+        foreach ($launcherPath in $launcherPaths) {
+            $bytes = [System.IO.File]::ReadAllBytes($launcherPath)
+            for ($index = 0; $index -lt $bytes.Length; $index++) {
+                if ($bytes[$index] -eq 10) {
+                    ($index -gt 0 -and $bytes[$index - 1] -eq 13) | Should Be $true
+                }
+                ($bytes[$index] -lt 128) | Should Be $true
+            }
+        }
+    }
+
+    It 'supports portable launcher path fallback and smoke-test arguments' {
+        $portablePath = Join-Path $repoRoot 'tools\Start-StableTunePortable.cmd'
+        if (Test-Path -LiteralPath $portablePath) {
+            $launcher = Get-Content -LiteralPath $portablePath -Raw
+            $launcher | Should Match '%~dp0\.\.\\bin\\StableTune\.exe'
+            $launcher | Should Match '"%APP%" %\*'
+        }
+    }
+
     It 'persists and clears crash guard state without registering machine tasks in tests' {
         $testRoot = Join-Path $env:TEMP "FelixOptimizerGuard-$([guid]::NewGuid().ToString('N'))"
         $env:FELIX_OPTIMIZER_HOME = $testRoot

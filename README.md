@@ -6,9 +6,9 @@
 
 [下载最新版本](https://github.com/HeFanweiming/StableTune/releases/latest)
 
-当前版本：`0.1.9.1`
+当前版本：`0.1.9.2`
 
-当前说明对应版本：`0.1.9.1`
+当前说明对应版本：`0.1.9.2`
 
 > StableTune 只执行用户明确选择的优化项目。程序不会自动批量修改系统，不会
 > 提供 BIOS 超频、MSR/RwEverything、反作弊绕过或永久删除文件等功能。
@@ -45,7 +45,7 @@
 ### 便携版运行
 
 1. 打开 [Releases](https://github.com/HeFanweiming/StableTune/releases/latest)。
-2. 下载 `StableTune-v0.1.9.1-win-x64.zip`。
+2. 下载 `StableTune-v0.1.9.2-win-x64.zip`。
 3. 解压到普通目录，例如 `D:\Tools\StableTune`。
 4. 双击 `Start-StableTune.cmd`，或直接运行 `bin\StableTune.exe`。
 5. 程序以普通权限启动；执行需要管理员权限的规则时，按提示完成 UAC 确认。
@@ -55,11 +55,11 @@
 仓库内同时保留当前源码发布包：
 
 ```text
-dist/StableTune-prototype-v0.1.9.1-20260920.zip
+dist/StableTune-prototype-v0.1.9.2-20260920.zip
 ```
 
 ```powershell
-Get-FileHash .\StableTune-v0.1.9.1-win-x64.zip -Algorithm SHA256
+Get-FileHash .\StableTune-v0.1.9.2-win-x64.zip -Algorithm SHA256
 ```
 
 计算出的值应与 `.sha256` 文件中的值完全一致。
@@ -221,6 +221,17 @@ cmake --install tmp\qt-build --config Release --prefix $prefix
 ```
 
 安装流程会复制 Qt 运行库、平台插件、PowerShell 模块和规则目录。
+
+生成与 GitHub Release 一致的便携包：
+
+```powershell
+pwsh -NoLogo -NoProfile -File .\Build-PortableRelease.ps1 `
+  -Version 0.1.9.2 `
+  -InstallRoot .\tmp\StableTune `
+  -OutputDirectory .\tmp\portable-release
+```
+
+打包脚本会固定写入 CRLF/ASCII 启动器，并拒绝覆盖已有输出。
 
 ## 命令行
 

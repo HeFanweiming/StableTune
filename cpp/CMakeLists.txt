@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.24)
 
 project(
     StableTune
-    VERSION 0.1.9.1
+    VERSION 0.1.9.2
     DESCRIPTION "PowerShell-backed Qt UI plus the experimental native core"
     LANGUAGES CXX
 )
